@@ -3,4 +3,4 @@ from django.template import loader
 from django.shortcuts import render
 
 def show_hello(request):
-    return render(request, 'hello.html')
+    return render(request, 'index.html')
