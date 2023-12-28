@@ -9,8 +9,9 @@ class Place(models.Model):
     placeID = models.SlugField(max_length=100, verbose_name='ID места', default='')
     description_short = models.TextField(blank=True)
     description_long = models.TextField(blank=True)
-    lat = models.FloatField(verbose_name='Широта')
     lon = models.FloatField(verbose_name='Долгота')
+    lat = models.FloatField(verbose_name='Широта')
+
 
     def __str__(self):
         return self.title
