@@ -4,6 +4,7 @@ from conf.wsgi import *
 from django.shortcuts import render, get_object_or_404
 from places.models import Place, Image
 
+
 def main(request):
     features = []
     places = Place.objects.prefetch_related('images').all()
@@ -28,7 +29,7 @@ def main(request):
                 "coordinates": [place.lon, place.lat],
             },
             "properties": {
-                "title":place.title_short,
+                "title": place.title_short,
                 "placeId": place.placeID,
                 "details": place_details,
             }

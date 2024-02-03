@@ -23,7 +23,7 @@ class Image(models.Model):
     class Meta:
         verbose_name = 'Изображение'
         verbose_name_plural = 'Изображения'
-        ordering=['image_order']
+        ordering = ['image_order']
 
     def __str__(self):
         return f"{self.pk} {self.place.title}"
