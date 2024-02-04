@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.urls import include, path
 
-from conf import settings
 from django.conf.urls.static import static
 
+from conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),

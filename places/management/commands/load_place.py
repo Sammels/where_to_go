@@ -16,7 +16,6 @@ class Command(BaseCommand):
             help="Сссылка на инфо о локации",
         )
 
-
     def handle(self, *args, **options):
         url = options['place_url']
 

@@ -32,7 +32,7 @@ def main(request):
                 "title": place.title_short,
                 "placeId": place.placeID,
                 "details": place_details,
-            }
+            },
         }
         features.append(place_geodata)
 

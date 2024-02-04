@@ -22,4 +22,3 @@ class ImageAdmin(SortableAdminBase, admin.ModelAdmin):
         ImageInline,
     ]
 
-
