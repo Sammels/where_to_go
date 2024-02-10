@@ -1,4 +1,3 @@
-import ast
 import os
 
 import requests
@@ -13,25 +12,22 @@ class Command(BaseCommand):
         parser.add_argument(
             'place_url',
             type=str,
-            help="Сссылка на инфо о локации",
+            help='Ссылка на информацию о локации',
         )
 
     def handle(self, *args, **options):
         url = options['place_url']
-
         response = requests.get(url)
         response.raise_for_status()
-
-        place = ast.literal_eval(''.join(response.json()['payload']['blob']['rawLines']))
-
+        place = response.json()
         new_place, _ = Place.objects.get_or_create(
             title=place['title'],
             defaults={
-                'description_short': place['description_short'],
-                'description_long': place['description_long'],
+                'short_description': place['description_short'],
+                'long_description': place['description_long'],
                 'lat': place['coordinates']['lat'],
                 'lon': place['coordinates']['lng'],
-            }
+            },
         )
 
         image_urls = place['imgs']
