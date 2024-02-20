@@ -39,6 +39,16 @@ python manage.py load_place <http://адрес/файла.json>
 ```
 SECRET_KEY=<YOUR SECRET KEY>
 DEBUG=True
+ALLOWED_HOSTS='127.0.0.1'
+CSRF_COOKIE_SECURE=<True or False>
+SESSION_COOKIE_SECURE=<True or False>
+SECURE_SSL_REDIRECT=<True or False>
+SECURE_HSTS_SECONDS=31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS=<True or False>
+SECURE_HSTS_PRELOAD=<True or False>
+SESSION_COOKIE_SECURE=<True or False>
+MEDIA_URL=<Directory where collected mediafile>
+STATIC_URL=<Directory where collected static>
 ```
 **SECRET_KEY** - Секретный ключ для конкретной установки Django. Он используется для обеспечения cryptographic signing,
 и должен быть установлен на уникальное, непредсказуемое значение. Сгенерировать SECRET_KEY можно по
@@ -46,6 +56,37 @@ DEBUG=True
 
 **DEBUG** - Булево значение, которое включает/выключает режим отладки. 
 Подробнее по [ссылке](https://django.fun/ru/docs/django/4.2/ref/settings/#debug).
+
+**ALLOWED_HOSTS** - Список представляющий хостов, который обслуживает джанго сайт.
+Подробнее по [ссылка](https://django.fun/docs/django/5.0/ref/settings/#allowed-hosts)
+
+**CSRF_COOKIE_SECURE** - Булево значение, если True , cookie будет помечен как «безопасный», что означает,
+что браузеры могут гарантировать, что cookie будет отправлен только при HTTPS-соединении.
+
+**SESSION_COOKIE_SECURE** - Если установлено значение True, cookie будет помечен как «безопасный», что означает,
+что браузеры могут гарантировать, что cookie будет отправлен только по соединению HTTPS.
+
+**SECURE_SSL_REDIRECT** - Если True, все не-HTTPS запросы переводятся на HTTPS.
+
+**SECURE_HSTS_SECONDS** - Если установлено ненулевое целочисленное значение, SecurityMiddleware устанавливает заголовок
+[Строгая транспортная безопасность](https://django.fun/docs/django/5.0/ref/middleware/#http-strict-transport-security).
+Неверная настройка может (временно вывести сайт из строя)
+
+**SECURE_HSTS_INCLUDE_SUBDOMAINS** - Если True, SecurityMiddleware добавляет директиву includeSubDomains к
+заголовку Строгая транспортная безопасность HTTP.
+
+**SESSION_COOKIE_SECURE** - Если установлено значение True, cookie будет помечен как «безопасный», что означает,
+что браузеры могут гарантировать, что cookie будет отправлен только по соединению HTTPS.
+
+**MEDIA_URL** -URL, который обрабатывает медиа, обслуживаемые из MEDIA_ROOT, используемый для managing stored files.
+
+**STATIC_URL** - URL для использования при обращении к статическим файлам, расположенным в STATIC_ROOT.
+
+
+
+
+
+
 
 ## Использование
 
