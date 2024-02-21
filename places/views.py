@@ -1,16 +1,13 @@
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from django.db.models import Prefetch
 
-from places.models import Place, Image
+from places.models import Place
 
 
 def main(request):
     features = []
-    places = Place.objects.prefetch_related(
-        Prefetch('images', queryset=Image.objects.all())
-    ).all()
+    places = Place.objects.prefetch_related('images').all()
     for place in places:
         base_url = request.build_absolute_uri()
         path_url = reverse("places", args=(place.pk,))
@@ -37,11 +34,7 @@ def main(request):
 
 
 def place_details(request, place_id):
-    place = get_object_or_404(
-        Place.objects.select_related('images').prefetch_related(
-            Prefetch('images', queryset=Image.objects.all())
-        ),
-        id=place_id)
+    place = get_object_or_404(Place.objects.prefetch_related('images'), id=place_id)
     place_details = {
         'title': place.title,
         'short_description': place.short_description,

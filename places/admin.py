@@ -5,6 +5,8 @@ from django.utils.safestring import mark_safe
 
 from places.models import Place, Image
 
+MAX_HEIGHT = 200
+MAX_WIDTH = 200
 
 class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     model = Image
@@ -12,7 +14,9 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     readonly_fields = ['image_preview']
 
     def image_preview(self, obj):
-        return format_html('<img src="{}" style="max-height: 200px; max-width: 200px;"/>', mark_safe(obj.image.url))
+        return format_html(
+            '<img src="{}" style="max-height: {}px; max-width: {}px;"/>'.format(obj.image.url, MAX_HEIGHT, MAX_WIDTH),
+            mark_safe(obj.image.url))
 
 
 @admin.register(Place)
