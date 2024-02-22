@@ -8,28 +8,35 @@ from places.models import Place, Image
 MAX_HEIGHT = 200
 MAX_WIDTH = 200
 
+
 class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     model = Image
     extra = 1
-    readonly_fields = ['image_preview']
+    readonly_fields = ["image_preview"]
 
     def image_preview(self, obj):
         return format_html(
-            '<img src="{}" style="max-height: {}px; max-width: {}px;"/>'.format(obj.image.url, MAX_HEIGHT, MAX_WIDTH),
-            mark_safe(obj.image.url))
+            '<img src="{}" style="max-height: {}px; max-width: {}px;"/>'.format(
+                obj.image.url, MAX_HEIGHT, MAX_WIDTH
+            ),
+            mark_safe(obj.image.url),
+        )
 
 
 @admin.register(Place)
 class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
-    inlines = (ImageInline, )
-    search_fields = ('title', )
-    exclude = ('placeID', )
+    inlines = (ImageInline,)
+    search_fields = ("title",)
+    exclude = ("placeID",)
 
 
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ('place', 'image', 'order', 'image_preview')
-    raw_id_fields = ('place', )
+    list_display = ("place", "image", "order", "image_preview")
+    raw_id_fields = ("place",)
 
     def image_preview(self, obj):
-        return format_html('<img src="{}" style="max-height: 200px; max-width: 200px;"/>', mark_safe(obj.image.url))
+        return format_html(
+            '<img src="{}" style="max-height: 200px; max-width: 200px;"/>',
+            mark_safe(obj.image.url),
+        )
