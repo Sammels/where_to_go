@@ -19,20 +19,20 @@ class Command(BaseCommand):
         url = options['place_url']
         response = requests.get(url)
         response.raise_for_status()
-        place = response.json()
-        raw_place, _ = Place.objects.get_or_create(
-            title=place['title'],
+        place_raw = response.json()
+        place, _ = Place.objects.get_or_create(
+            title=place_raw['title'],
             defaults={
-                'short_description': place['description_short'],
-                'long_description': place['description_long'],
-                'lat': place['coordinates']['lat'],
-                'lon': place['coordinates']['lng'],
+                'short_description': place_raw['description_short'],
+                'long_description': place_raw['description_long'],
+                'lat': place_raw['coordinates']['lat'],
+                'lon': place_raw['coordinates']['lng'],
             },
         )
 
-        image_urls = place['imgs']
+        image_urls = place_raw['imgs']
         for image_url in image_urls:
             response = requests.get(image_url)
             response.raise_for_status()
             image_content = ContentFile(response.content, name=os.path.split(image_url)[1])
-            Image.objects.create(place=raw_place, image=image_content)
+            Image.objects.create(place=place, image=image_content)
